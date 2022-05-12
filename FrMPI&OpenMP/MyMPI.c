@@ -427,9 +427,11 @@ void read_row_striped_matrix(char* s,        /* IN - File name */
     /* Dynamically allocate matrix. Allow double subscripting
        through 'a'. */
 
-    *storage = (void*)my_malloc(id, local_rows * *n * datum_size);
+    *storage =
+        (void*)my_malloc(id, local_rows * *n * datum_size);  //申请自己的内存
     *subs = (void**)my_malloc(id, local_rows * PTR_SIZE);
 
+    //实现sub[i]指向每一行
     lptr = (void*)&(*subs[0]);
     rptr = (void*)*storage;
     for (i = 0; i < local_rows; i++) {

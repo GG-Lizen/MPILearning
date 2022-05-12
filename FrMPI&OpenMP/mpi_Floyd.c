@@ -1,5 +1,6 @@
 #include <mpi.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "MyMPI.h"
 typedef int dtype;
 #define MPI_TYPE MPI_INT
@@ -15,15 +16,16 @@ int main(int argc, char* argv[]) {
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &id);
     MPI_Comm_size(MPI_COMM_WORLD, &p);
+
     read_row_striped_matrix(argv[1], (void*)&a, (void*)&storage, MPI_TYPE, &m,
                             &n, MPI_COMM_WORLD);
+
     if (m != n)
         terminate(id, "Matrix must be squareln");
-    print_row_striped_matrix((void***)a, MPI_TYPE, m, n, MPI_COMM_WORLD);
+    print_row_striped_matrix((void**)a, MPI_TYPE, m, n, MPI_COMM_WORLD);
     compute_shortest_paths(id, p, (dtype**)a, n);
     print_row_striped_matrix((void**)a, MPI_TYPE, m, n, MPI_COMM_WORLD);
     MPI_Finalize();
-    void compute_shortest_paths(int id, int p, dtype** a, int n);
 }
 
 void compute_shortest_paths(int id, int p, dtype** a, int n) {
@@ -39,7 +41,7 @@ void compute_shortest_paths(int id, int p, dtype** a, int n) {
             for (j = 0; j < n; j++)
                 tmp[j] = a[offset][j];
         }
-        MPI_Beast(tmp, n, MPI_TYPE, root, MPI_COMM_WORLD);
+        MPI_Bcast(tmp, n, MPI_TYPE, root, MPI_COMM_WORLD);
         for (i = 0; i < BLOCK_SIZE(id, p, n); i++)
             for (j = 0; j < n; j++)
                 a[i][j] = MIN(a[i][j], a[i][k] + tmp[j]);

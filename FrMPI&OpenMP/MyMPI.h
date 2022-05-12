@@ -11,7 +11,8 @@
 /************************* MACROS **************************/
 #ifndef MYMPI_H_
 #define MYMPI_H_
-
+#include <string.h>
+#include "mpi.h"
 #define DATA_MSG 0
 #define PROMPT_MSG 1
 #define RESPONSE_MSG 2
@@ -73,4 +74,5 @@ void print_row_striped_matrix(void**, MPI_Datatype, int, int, MPI_Comm);
 void print_block_vector(void*, MPI_Datatype, int, MPI_Comm);
 void print_replicated_vector(void*, MPI_Datatype, int, MPI_Comm);
 
+void* my_malloc(int id, int bytes);
 #endif
