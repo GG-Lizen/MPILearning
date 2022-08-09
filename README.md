@@ -10,19 +10,6 @@ LLNLexercise：https://hpc-tutorials.llnl.gov/mpi/ 代码
 
 ```
 .
-├── ByLizen
-│   ├── Myutils.c
-│   ├── Myutils.h
-│   ├── Myutils.o
-│   ├── alltoall
-│   ├── alltoall.cpp
-│   ├── datainit
-│   ├── datainit.c
-│   ├── libMyutils.a
-│   ├── mpi_MergeSort
-│   ├── mpi_MergeSort.c
-│   ├── ser_MergeSort
-│   └── ser_MergeSort.c
 ├── FrMPI&OpenMP
 │   ├── ESieve
 │   ├── EratosthensSieve.cpp
