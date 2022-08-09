@@ -2,8 +2,6 @@
 # MPILearning
 ## FILE TREE
 
-ByLizen：不完全自己敲的
-
 FrMPI&OpenMP：《MPI与OpenMP并行编程》代码
 
 LLNLexercise：https://hpc-tutorials.llnl.gov/mpi/ 代码
